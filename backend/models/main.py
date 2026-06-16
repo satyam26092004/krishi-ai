@@ -28,11 +28,13 @@ app.add_middleware(
 def debug_key():
     import os
     key = os.environ.get("OPENAI_API_KEY", "")
+    all_keys = list(os.environ.keys())
     return {
         "is_empty": len(key) == 0,
         "length": len(key),
         "prefix": key[:12] if len(key) >= 12 else key,
-        "suffix": key[-4:] if len(key) >= 4 else key
+        "suffix": key[-4:] if len(key) >= 4 else key,
+        "all_env_keys": all_keys
     }
 
 # --- Model Paths ---
