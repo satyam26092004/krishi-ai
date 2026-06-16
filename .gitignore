@@ -39,3 +39,12 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# python virtual environments & cache
+.venv/
+backend/.venv/
+__pycache__/
+*.pyc
+
+# machine learning models (too large for GitHub)
+*.pkl

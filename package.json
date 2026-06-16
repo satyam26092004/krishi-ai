@@ -3,21 +3,36 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "concurrently --kill-others-on-fail --names frontend,backend --prefix-colors blue,green \"next dev --webpack\" \"python3 backend/models/main.py --server\"",
+    "backend": "python3 backend/models/main.py --server",
+    "install-backend": "python3 -m pip install -r backend/requirements.txt --user",
     "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
+    "start": "concurrently --kill-others-on-fail --names frontend,backend --prefix-colors blue,green \"next start\" \"python3 backend/models/main.py --server\"",
+    "lint": "eslint",
+    "stop": "lsof -ti :3000 -ti :8000 | xargs kill -9 2>/dev/null && echo 'All servers stopped' || echo 'No servers running'"
   },
   "dependencies": {
+    "@phosphor-icons/react": "^2.1.10",
+    "@react-spring/web": "^10.1.1",
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.6.1",
+    "framer-motion": "^12.40.0",
+    "gsap": "^3.15.0",
+    "lenis": "^1.3.23",
     "next": "16.2.9",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "react-parallax-tilt": "^1.7.331",
+    "three": "^0.184.0",
+    "typed.js": "^3.0.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/three": "^0.184.1",
+    "concurrently": "^10.0.3",
     "eslint": "^9",
     "eslint-config-next": "16.2.9",
     "tailwindcss": "^4",
